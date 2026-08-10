@@ -1,0 +1,7 @@
+logging:
+  level:
+    com.ratelimiter: DEBUG
+
+ratelimiter:
+  admin:
+    bootstrap-key: ${RATELIMITER_ADMIN_BOOTSTRAP_KEY:}

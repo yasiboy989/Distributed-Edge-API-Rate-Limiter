@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:ratelimiter-test;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+
+ratelimiter:
+  admin:
+    bootstrap-key: test_bootstrap_key

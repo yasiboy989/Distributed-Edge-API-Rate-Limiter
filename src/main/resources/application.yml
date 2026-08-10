@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: ratelimiter
+  threads:
+    virtual:
+      enabled: true
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    default-property-inclusion: non_null
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: 200ms
+      lettuce:
+        pool:
+          max-active: 32
+          max-idle: 16
+          min-idle: 4
+  datasource:
+    url: jdbc:h2:mem:ratelimiter;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+
+ratelimiter:
+  admin:
+    bootstrap-key: ${RATELIMITER_ADMIN_BOOTSTRAP_KEY:}
+  redis:
+    failure-mode: FAIL_OPEN
+  batch:
+    max-size: 50
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
